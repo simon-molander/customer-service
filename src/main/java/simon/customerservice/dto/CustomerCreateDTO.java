@@ -1,34 +1,31 @@
 package simon.customerservice.dto;
 
-import java.lang.classfile.constantpool.StringEntry;
 
-// data kommer in
+import jakarta.validation.constraints.Email;
+
 public class CustomerCreateDTO {
-    @NotBLank (message = "name is requierd")
-    private String name;
-    @NotBlank(massage = "Email is requierd")
+    private String firstName;
+    private String lastName;
+    @Email
     private String email;
-
     private String phone;
 
-    public CustomerCreateDTO() {
-    }
-
-
-    public CustomerCreateDTO(String name,
-                             String email,
-                             String phone) {
-        this.name = name;
+    public CustomerCreateDTO(String firstName, String lastName, String email, String phone) {
+        this.firstName = firstName;
+        this.lastName = lastName;
         this.email = email;
         this.phone = phone;
     }
 
-    public String getName() {
-        return name;
+    public CustomerCreateDTO() {
     }
 
-    public void setName(String name) {
-        this.name = name;
+    public String getFirstName() {
+        return firstName;
+    }
+
+    public void setFirstName(String firstName) {
+        this.firstName = firstName;
     }
 
     public String getEmail() {
@@ -37,6 +34,14 @@ public class CustomerCreateDTO {
 
     public void setEmail(String email) {
         this.email = email;
+    }
+
+    public String getLastName() {
+        return lastName;
+    }
+
+    public void setLastName(String lastName) {
+        this.lastName = lastName;
     }
 
     public String getPhone() {

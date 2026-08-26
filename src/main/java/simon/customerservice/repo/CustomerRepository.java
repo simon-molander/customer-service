@@ -1,9 +1,10 @@
 package simon.customerservice.repo;
 
 import org.springframework.data.jpa.repository.JpaRepository;
-import org.springframework.data.repository.CrudRepository;
-import simon.customerservice.model.Customer;
+import simon.customerservice.customerEntity.CustomerEntity;
 
-public interface CustomerRepository extends JpaRepository<Customer, Long> {
+import java.util.Optional;
+
+public interface CustomerRepository extends JpaRepository<CustomerEntity, Long> {
+    Optional<CustomerEntity> findByEmail(String email);
 }
-//Optional<Customer> findByEmail(String email);

@@ -1,25 +1,35 @@
-package simon.customerservice.dto;
+package simon.customerservice.customerEntity;
 
+
+import jakarta.persistence.*;
 import jakarta.validation.constraints.Email;
+import org.example.javabackend1.Booking.BookingEntity;
 
-public class CustomerResponseDTO {
+import java.util.ArrayList;
+import java.util.List;
+
+
+@Entity
+@Table(name = "customer")
+public class CustomerEntity {
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
+
     private String firstName;
+
     private String lastName;
 
     @Email
     private String email;
+
     private String phone;
 
-    public CustomerResponseDTO(Long id, String firstName, String lastName, String email, String phone) {
-        this.id = id;
-        this.firstName = firstName;
-        this.lastName = lastName;
-        this.email = email;
-        this.phone = phone;
-    }
+    @OneToMany(mappedBy = "customer")
+    private List<BookingEntity> bookings = new ArrayList<>();
 
-    public CustomerResponseDTO() {
+
+    public CustomerEntity() {
     }
 
     public Long getId() {
@@ -60,5 +70,13 @@ public class CustomerResponseDTO {
 
     public void setPhone(String phone) {
         this.phone = phone;
+    }
+
+    public List<BookingEntity> getBookings() {
+        return bookings;
+    }
+
+    public void setBookings(List<BookingEntity> bookings) {
+        this.bookings = bookings;
     }
 }
