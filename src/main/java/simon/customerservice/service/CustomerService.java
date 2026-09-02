@@ -46,10 +46,6 @@ public class CustomerService {
                         () -> new CustomerException("User with id " + String.valueOf(id) + " does not exist")
                 );
 
-        if (!customer.getBookings().isEmpty()) {
-            throw new CustomerException("Cannot delete customer with active bookings");
-        }
-
         customerRepository.delete(customer);
     }
 
