@@ -2,20 +2,21 @@ package simon.customerservice.service;
 
 
 import jakarta.transaction.Transactional;
-import org.example.javabackend1.Exceptions.CustomerException;
 import org.springframework.stereotype.Service;
 import simon.customerservice.customerEntity.CustomerEntity;
 import simon.customerservice.dto.CustomerCreateDTO;
 import simon.customerservice.dto.CustomerResponseDTO;
+import simon.customerservice.exceptions.CustomerException;
+import simon.customerservice.repo.CustomerRepository;
 
 import java.util.ArrayList;
 import java.util.List;
 
 @Service
 public class CustomerService {
-    private final org.example.javabackend1.Customer.CustomerRepository customerRepository;
+    private final CustomerRepository customerRepository;
 
-    public CustomerService(org.example.javabackend1.Customer.CustomerRepository customerRepository) {
+    public CustomerService(CustomerRepository customerRepository) {
         this.customerRepository = customerRepository;
     }
 

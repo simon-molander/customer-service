@@ -3,7 +3,7 @@ package simon.customerservice.customerEntity;
 
 import jakarta.persistence.*;
 import jakarta.validation.constraints.Email;
-import org.example.javabackend1.Booking.BookingEntity;
+
 
 import java.util.ArrayList;
 import java.util.List;
@@ -24,9 +24,9 @@ public class CustomerEntity {
     private String email;
 
     private String phone;
-
-    @OneToMany(mappedBy = "customer")
-    private List<BookingEntity> bookings = new ArrayList<>();
+//
+//    @OneToMany(mappedBy = "customer")
+//    private List<BookingEntity> bookings = new ArrayList<>();
 
 
     public CustomerEntity() {
@@ -72,11 +72,11 @@ public class CustomerEntity {
         this.phone = phone;
     }
 
-    public List<BookingEntity> getBookings() {
-        return bookings;
-    }
-
-    public void setBookings(List<BookingEntity> bookings) {
-        this.bookings = bookings;
-    }
+//    public List<BookingEntity> getBookings() {
+//        return bookings;
+//    }
+//
+//    public void setBookings(List<BookingEntity> bookings) {
+//        this.bookings = bookings;
+//    }
 }
