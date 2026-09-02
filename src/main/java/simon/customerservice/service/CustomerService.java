@@ -1,7 +1,5 @@
 package simon.customerservice.service;
 
-
-import jakarta.transaction.Transactional;
 import org.springframework.stereotype.Service;
 import simon.customerservice.customerEntity.CustomerEntity;
 import simon.customerservice.dto.CustomerCreateDTO;
@@ -39,7 +37,6 @@ public class CustomerService {
         return createCustomerResponseDTO(createDTO, customer);
     }
 
-    @Transactional
     public void delete(Long id) {
         CustomerEntity customer = customerRepository.findById(id)
                 .orElseThrow(

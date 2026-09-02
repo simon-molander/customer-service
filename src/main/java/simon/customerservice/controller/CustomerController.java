@@ -21,7 +21,6 @@ public class CustomerController {
         return customerService.findAll();
     }
 
-
     @GetMapping("/{id}")
     public CustomerResponseDTO getCustomerById(@PathVariable Long id) {
         return customerService.findById(id);
