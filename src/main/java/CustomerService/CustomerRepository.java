@@ -1,7 +1,6 @@
-package simon.customerservice.repo;
+package CustomerService;
 
 import org.springframework.data.jpa.repository.JpaRepository;
-import simon.customerservice.customerEntity.CustomerEntity;
 
 import java.util.Optional;
 
