@@ -1,13 +1,18 @@
-package simon.customerservice.dto;
+package CustomerService;
 
 
 import jakarta.validation.constraints.Email;
+import jakarta.validation.constraints.NotNull;
 
 public class CustomerCreateDTO {
+    @NotNull
     private String firstName;
+    @NotNull
     private String lastName;
     @Email
+    @NotNull
     private String email;
+    @NotNull
     private String phone;
 
     public CustomerCreateDTO(String firstName, String lastName, String email, String phone) {

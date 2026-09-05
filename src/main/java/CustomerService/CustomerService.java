@@ -1,11 +1,8 @@
-package simon.customerservice.service;
+package CustomerService;
 
+import CustomerService.Exceptions.CustomerNotFoundException;
+import CustomerService.Exceptions.EmailInUseException;
 import org.springframework.stereotype.Service;
-import simon.customerservice.customerEntity.CustomerEntity;
-import simon.customerservice.dto.CustomerCreateDTO;
-import simon.customerservice.dto.CustomerResponseDTO;
-import simon.customerservice.exceptions.CustomerException;
-import simon.customerservice.repo.CustomerRepository;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -18,9 +15,16 @@ public class CustomerService {
         this.customerRepository = customerRepository;
     }
 
+    private CustomerEntity getCustomerById(long id) {
+        return customerRepository.findById(id)
+            .orElseThrow(
+                    () -> new CustomerNotFoundException("User with id " + id + " does not exist")
+            );
+    }
+
     public CustomerResponseDTO create(CustomerCreateDTO createDTO) {
         if (customerRepository.findByEmail(createDTO.getEmail()).isPresent()) {
-            throw new CustomerException("Email already in use");
+            throw new EmailInUseException("A customer with this email already exists");
         }
 
         CustomerEntity customer = new CustomerEntity();
@@ -29,19 +33,13 @@ public class CustomerService {
     }
 
     public CustomerResponseDTO update(Long id, CustomerCreateDTO createDTO) {
-        CustomerEntity customer = customerRepository.findById(id)
-                .orElseThrow(
-                        () -> new CustomerException("User with id " + String.valueOf(id) + " does not exist")
-                );
+        CustomerEntity customer = getCustomerById(id);
 
         return createCustomerResponseDTO(createDTO, customer);
     }
 
     public void delete(Long id) {
-        CustomerEntity customer = customerRepository.findById(id)
-                .orElseThrow(
-                        () -> new CustomerException("User with id " + String.valueOf(id) + " does not exist")
-                );
+        CustomerEntity customer = getCustomerById(id);
 
         customerRepository.delete(customer);
     }
@@ -54,9 +52,7 @@ public class CustomerService {
 
         CustomerEntity saved = customerRepository.saveAndFlush(customer);
 
-        CustomerEntity reloaded = customerRepository.findById(saved.getId())
-                .orElseThrow(() -> new CustomerException("Customer not found after save"));
-        return toResponse(reloaded);
+        return toResponse(saved);
     }
 
     public CustomerResponseDTO toResponse(CustomerEntity customer) {
@@ -71,10 +67,7 @@ public class CustomerService {
     }
 
     public CustomerResponseDTO findById(Long id) {
-        CustomerEntity customer = customerRepository.findById(id)
-                .orElseThrow(
-                        () -> new CustomerException("User with id " + String.valueOf(id) + " does not exist")
-                );
+        CustomerEntity customer = getCustomerById(id);
 
         return toResponse(customer);
     }

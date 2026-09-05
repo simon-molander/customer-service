@@ -1,4 +1,4 @@
-package simon.customerservice;
+package CustomerService;
 
 import org.springframework.boot.test.context.SpringBootTest;
 

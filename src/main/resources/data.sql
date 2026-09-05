@@ -1,1 +1,0 @@
-INSERT into customer (id,name)values (1, simon)
