@@ -46,7 +46,7 @@ public class CustomerService {
         CustomerEntity customer = getCustomerById(id);
         boolean hasActiveBookings = bookingClient.hasActiveBookings(id);
         if (hasActiveBookings) {
-            throw new CustomerHasActiveBookingException("customer cannot delete, active bookings");
+            throw new CustomerHasActiveBookingException("Can not delete a customer with active bookings");
         }
         customerRepository.delete(customer);
     }
