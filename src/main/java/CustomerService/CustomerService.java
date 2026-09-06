@@ -1,7 +1,9 @@
 package CustomerService;
 
+import CustomerService.Exceptions.CustomerHasActiveBookingException;
 import CustomerService.Exceptions.CustomerNotFoundException;
 import CustomerService.Exceptions.EmailInUseException;
+import CustomerService.client.BookingClient;
 import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
@@ -10,9 +12,11 @@ import java.util.List;
 @Service
 public class CustomerService {
     private final CustomerRepository customerRepository;
+    private final BookingClient bookingClient;
 
-    public CustomerService(CustomerRepository customerRepository) {
+    public CustomerService(CustomerRepository customerRepository, BookingClient bookingClient) {
         this.customerRepository = customerRepository;
+        this.bookingClient = bookingClient;
     }
 
     private CustomerEntity getCustomerById(long id) {
@@ -40,7 +44,10 @@ public class CustomerService {
 
     public void delete(Long id) {
         CustomerEntity customer = getCustomerById(id);
-
+        boolean hasActiveBookings = bookingClient.hasActiveBookings(id);
+        if (hasActiveBookings) {
+            throw new CustomerHasActiveBookingException("customer cannot delete, active bookings");
+        }
         customerRepository.delete(customer);
     }
 
