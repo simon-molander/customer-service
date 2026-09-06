@@ -20,10 +20,6 @@ public class CustomerEntity {
     private String email;
 
     private String phone;
-//
-//    @OneToMany(mappedBy = "customer")
-//    private List<BookingEntity> bookings = new ArrayList<>();
-
 
     public CustomerEntity() {
     }
@@ -67,12 +63,4 @@ public class CustomerEntity {
     public void setPhone(String phone) {
         this.phone = phone;
     }
-
-//    public List<BookingEntity> getBookings() {
-//        return bookings;
-//    }
-//
-//    public void setBookings(List<BookingEntity> bookings) {
-//        this.bookings = bookings;
-//    }
 }
