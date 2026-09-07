@@ -1,5 +1,6 @@
 package CustomerService.client;
 
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Component;
 import org.springframework.web.client.HttpClientErrorException;
 import org.springframework.web.client.RestClient;
@@ -8,9 +9,9 @@ import org.springframework.web.client.RestClient;
 public class BookingClient {
     private final RestClient restClient;
 
-    public BookingClient() {
+    public BookingClient(@Value("${booking.service.url}") String apiURL) {
         this.restClient = RestClient.builder()
-                .baseUrl("http://localhost:8080")
+                .baseUrl(apiURL)
                 .build();
     }
 
